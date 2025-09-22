@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Inicio - Tienda de Ropa{% endblock %}
+
+{% block content %}
+    <div class="p-5 text-center bg-light">
+        <h1 class="mb-3">Bienvenido a nuestra Tienda de Ropa</h1>
+        <p class="lead">
+            {% if 'logged_in' in session %}
+                ¡Hola, **{{ session['username'] }}**! Tu rol es: **{{ session['role'] }}**.
+            {% else %}
+                Explora nuestras últimas colecciones de moda.
+            {% endif %}
+        </p>
+        <hr class="my-4">
+        <p>
+            {% if 'logged_in' in session %}
+                <a class="btn btn-primary btn-lg" href="{{ url_for('dashboard') }}" role="button">Ir a mi Dashboard</a>
+            {% else %}
+                <a class="btn btn-primary btn-lg" href="{{ url_for('login') }}" role="button">Iniciar Sesión</a>
+                <a class="btn btn-secondary btn-lg" href="{{ url_for('register') }}" role="button">Registrarse</a>
+            {% endif %}
+        </p>
+    </div>
+{% endblock %}

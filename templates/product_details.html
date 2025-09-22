@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}{{ product[1] }}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-6">
+            <img src="{{ product[5] }}" class="img-fluid" alt="{{ product[1] }}">
+        </div>
+        <div class="col-md-6">
+            <h1>{{ product[1] }}</h1>
+            <p>{{ product[2] }}</p>
+            <h3>Precio: ${{ product[3] }}</h3>
+            <p>Stock disponible: {{ product[4] }}</p>
+            
+            <form action="{{ url_for('add_to_cart', product_id=product[0]) }}" method="POST">
+                <div class="mb-3">
+                    <label for="quantity" class="form-label">Cantidad:</label>
+                    <input type="number" name="quantity" id="quantity" class="form-control" value="1" min="1" max="{{ product[4] }}">
+                </div>
+                <button type="submit" class="btn btn-success">Añadir al Carrito</button>
+            </form>
+            <a href="{{ url_for('product_list') }}" class="btn btn-secondary mt-3">Volver a Productos</a>
+        </div>
+    </div>
+{% endblock %}
