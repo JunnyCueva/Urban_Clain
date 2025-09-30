@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Carrito{% endblock %}
+{% block content %}
+<div class="container my-5">
+<h2>Mi Carrito</h2>
+{% if cart %}
+<table class="table table-striped">
+<tr><th>Producto</th><th>Precio</th><th>Cantidad</th><th>Subtotal</th></tr>
+{% for item in cart.values() %}
+<tr>
+<td>{{ item.name }}</td>
+<td>${{ item.price }}</td>
+<td>{{ item.quantity }}</td>
+<td>${{ (item.price * item.quantity)|round(2) }}</td>
+</tr>
+{% endfor %}
+<tr>
+<td colspan="3"><strong>Total:</strong></td>
+<td><strong>${{ total|round(2) }}</strong></td>
+</tr>
+</table>
+<a href="{{ url_for('dashboard') }}" class="btn btn-primary">Seguir Comprando</a>
+{% else %}
+<p>Tu carrito está vacío.</p>
+<a href="{{ url_for('dashboard') }}" class="btn btn-primary">Ver Productos</a>
+{% endif %}
+</div>
+{% endblock %}
